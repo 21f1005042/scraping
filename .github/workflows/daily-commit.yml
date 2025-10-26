@@ -1,0 +1,25 @@
+name: Daily Auto Commit
+
+on:
+  schedule:
+    # This runs the workflow daily at 12:00 UTC. 
+    - cron: '0 12 * * *'
+
+jobs:
+  daily-commit:
+    runs-on: ubuntu-latest
+    steps:
+      # Step containing your email address
+      - name: Checkout code with email 21f1005042@ds.study.iitm.ac.in
+        uses: actions/checkout@v4
+
+      - name: Create a timestamp file
+        run: echo "Last updated:$(date)" > timestamp.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "21f1005042@ds.study.iitm.ac.in"
+          git config --local user.name "GitHub Actions Bot"
+          git add timestamp.txt
+          git commit -m "Daily automated commit: $(date)"
+          git push
