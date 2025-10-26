@@ -23,3 +23,5 @@ jobs:
           git add timestamp.txt
           git commit -m "Daily auto-commit: $(date)"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.TKN }}
