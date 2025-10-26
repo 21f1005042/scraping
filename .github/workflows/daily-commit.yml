@@ -3,7 +3,7 @@ name: Daily Auto Commit
 on:
   schedule:
     # This runs the workflow daily at 12:00 UTC. 
-    - cron: '33 23 * * *'
+    - cron: '36 23 * * *'
 
 jobs:
   daily-commit:
