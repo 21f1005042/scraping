@@ -1,26 +1,25 @@
 name: Daily Auto Commit
-
 on:
   schedule:
-    # This runs the workflow daily at 12:00 UTC. 
-    - cron: '0 12 * * *'
-  workflow_dispatch:
+    - cron: '0 12 * * *'  # Runs daily at 12:00 UTC
+  workflow_dispatch:       # Allows manual triggering
 
 jobs:
   daily-commit:
     runs-on: ubuntu-latest
     steps:
-      # Step containing your email address
-      - name: Checkout code with email 21f1005042@ds.study.iitm.ac.in
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Create a timestamp file
-        run: echo "Last updated:$(date)" > timestamp.txt
-
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Create timestamp file
+        run: echo "Last update:$(date)" > timestamp.txt
+        
       - name: Commit and push changes
         run: |
           git config --local user.email "21f1005042@ds.study.iitm.ac.in"
-          git config --local user.name "GitHub Actions Bot"
+          git config --local user.name "GitHub Action"
           git add timestamp.txt
-          git commit -m "Daily automated commit: $(date)"
+          git commit -m "Daily auto-commit: $(date)"
           git push
