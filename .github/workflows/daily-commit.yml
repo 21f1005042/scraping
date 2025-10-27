@@ -1,27 +1,27 @@
 name: Daily Auto Commit
+
 on:
   schedule:
-    - cron: '0 12 * * *'  # Runs daily at 12:00 UTC
-  workflow_dispatch:       # Allows manual triggering
+    - cron: '0 12 * * *'
+  workflow_dispatch:
 
 jobs:
   daily-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout repository with email 21f1005042@ds.study.iitm.ac.in
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.TKN }}
-          
+
       - name: Create timestamp file
-        run: echo "Last update:$(date)" > timestamp.txt
-        
-      - name: Commit and push changes
+        run: echo "Last update: $(date)" > timestamp.txt
+
+      - name: Configure Git and push changes
         run: |
           git config user.email "21f1005042@ds.study.iitm.ac.in"
           git config user.name "21f1005042"
+          git remote set-url origin https://x-access-token:${{ secrets.TKN }}@github.com/21f1005042/scraping.git
           git add timestamp.txt
           git commit -m "Daily auto-commit: $(date)"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.TKN }}
+          git push origin main
