@@ -20,7 +20,7 @@ jobs:
       - name: Configure Git and push changes
         run: |
           git config user.email "21f1005042@ds.study.iitm.ac.in"
-          git config user.name "21f1005042"
+          git config user.name "GitHub Actions"
           git add timestamp.txt
           git commit -m "Daily auto-commit: $(date)"
           git push https://x-access-token:${{ secrets.TKN }}@github.com/21f1005042/scraping.git main
