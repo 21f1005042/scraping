@@ -18,6 +18,8 @@ jobs:
         
       - name: Commit and push changes
         run: |
+          git config user.email "21f1005042@ds.study.iitm.ac.in"
+          git config user.name "21f1005042"
           git add timestamp.txt
           git commit -m "Daily auto-commit: $(date)"
           git push
