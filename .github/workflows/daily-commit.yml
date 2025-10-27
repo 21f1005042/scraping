@@ -15,7 +15,7 @@ jobs:
           token: ${{ secrets.TKN }}
 
       - name: Create timestamp file
-        run: echo "Last update: $(date)" > timestamp.txt
+        run: echo "Last update:$(date)" > timestamp.txt
 
       - name: Configure Git and push changes
         run: |
